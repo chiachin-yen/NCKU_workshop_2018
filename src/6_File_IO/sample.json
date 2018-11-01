@@ -1,0 +1,63 @@
+﻿{
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "25號",
+               "short_name" : "25號",
+               "types" : [ "street_number" ]
+            },
+            {
+               "long_name" : "中勝路",
+               "short_name" : "中勝路",
+               "types" : [ "route" ]
+            },
+            {
+               "long_name" : "內埔鎮",
+               "short_name" : "內埔鎮",
+               "types" : [ "administrative_area_level_3", "political" ]
+            },
+            {
+               "long_name" : "屏東縣",
+               "short_name" : "屏東縣",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "台灣",
+               "short_name" : "TW",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "912",
+               "short_name" : "912",
+               "types" : [ "postal_code" ]
+            }
+         ],
+         "formatted_address" : "912台灣屏東縣內埔鎮中勝路25號",
+         "geometry" : {
+            "location" : {
+               "lat" : 22.6681843,
+               "lng" : 120.607888
+            },
+            "location_type" : "ROOFTOP",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 22.6695332802915,
+                  "lng" : 120.6092369802915
+               },
+               "southwest" : {
+                  "lat" : 22.6668353197085,
+                  "lng" : 120.6065390197085
+               }
+            }
+         },
+         "place_id" : "ChIJ2essRJA8bjQRGWcEuI8WD00",
+         "plus_code" : {
+            "compound_code" : "MJ95+75 台灣屏東縣內埔鄉龍泉",
+            "global_code" : "7QJ2MJ95+75"
+         },
+         "types" : [ "establishment", "point_of_interest" ]
+      }
+   ],
+   "status" : "OK"
+}
