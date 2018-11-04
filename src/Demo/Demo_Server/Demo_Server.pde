@@ -43,19 +43,9 @@ void draw() {
       println(demoClient.ip() + " : " + clientMsg);
       switch(clientMsg) {
 
-      case "reset":
-        for (int i = 0; i<group; i++) {
-          for (int j = 0; j<cols; j++) {
-            for (int k = 0; k<rows; k++) {
-              tiles[i][j][k].tile_color=255;
-            }
-          }
-        }
-        demoServer.write("reset");
-      
       case "q":
         demoServer.stop();
-      
+
       case "test":
         demoServer.write("Demo Server Activated");
 

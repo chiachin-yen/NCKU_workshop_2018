@@ -1,14 +1,18 @@
+import csv
+import os
+import random
 import socket
 import time
-import random
 
+
+# installation parameters
 tile_group = 7
 group_row = 27
 group_col = 27
 
+# connection parameters
 host = '127.0.0.1'
 port = 10002
-
 demoSocket = socket.socket()
 demoSocket.connect((host, port))
 
@@ -23,7 +27,7 @@ def col_color(col=0, color=0):
     return msg
 
 
-def col_rolling():
+def demo_col_rolling():
     """Demo col rolling."""
     for i in range(group_col):
         result = ''
@@ -36,7 +40,17 @@ def col_rolling():
         time.sleep(1)
 
 
-def noise():
+def reset():
+    """Reset all tiles to 255"""
+    for i in range(group_col):
+        result = ''
+        while result != 'OK':
+            demoSocket.send(col_color(i, 255).encode())
+            result = demoSocket.recv(1024).decode()
+            print("Received from server: "+result)
+
+
+def demo_noise():
     """Randomize all pixels."""
     msg_list = []
     for i in range(tile_group):
@@ -53,7 +67,7 @@ def noise():
     print("Previously Received from server: "+data)
 
 
-def noise_loop():
+def demo_noise_loop():
     """Randomize all pixels one by one for testing."""
     for i in range(tile_group):
         for j in range(group_col):
@@ -69,16 +83,54 @@ def noise_loop():
                     # print("Received from server: " + result)
 
 
-def cmd_interpreter(cmd):
+'''
+def demo_load_image():
+    """Load image to display."""
+    from PIL import Image
+    img = Image.open("example.jpg")
+    pix = img.load()
+    img_width, img_height = img.size
+    for i in range(tile_group):
+        for j in range(group_row):
+            for k in range(group_col):
+                pass
+'''
 
+
+def load_csv():
+    """Load csv file for tiles color"""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    p = os.path.join(script_dir, "example.csv")
+    with open(p, 'r') as fp:
+        csv_reader = csv.reader(fp)
+        for i, row in enumerate(csv_reader):
+            row_val = []
+            for j, val in enumerate(row):
+                row_val.append("{}-{}-{}={}".format(
+                    i//group_row,
+                    j,
+                    i-(i//group_row)*group_row,
+                    val))
+            result = ''
+            while result != 'OK':
+                demoSocket.send('&'.join(row_val).encode())
+                result = demoSocket.recv(1024).decode()
+
+
+def cmd_interpreter(cmd):
+    """Interpret commands"""
     if cmd == "demo1":
-        col_rolling()
+        demo_col_rolling()
     elif cmd == "demo2":
         demo_2()
     elif cmd == "noise":
-        noise()
+        demo_noise()
     elif cmd == "noise_loop":
-        noise_loop()
+        demo_noise_loop()
+    elif cmd == "csv":
+        load_csv()
+    elif cmd == "reset":
+        reset()
     else:
         demoSocket.send(cmd.encode())
         data = demoSocket.recv(1024).decode()
