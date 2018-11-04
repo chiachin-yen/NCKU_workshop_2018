@@ -52,11 +52,12 @@ void draw() {
           }
         }
         demoServer.write("reset");
+      
       case "q":
         demoServer.stop();
       
-      case "":
-        demoServer.write("OK");
+      case "test":
+        demoServer.write("Demo Server Activated");
 
       default:
         // Interprete the Message from clients
@@ -82,8 +83,8 @@ void draw() {
             int[] tileNum = int(split(tileList[y], '-'));
             tiles[tileNum[0]][tileNum[1]][tileNum[2]].tile_color = tile_new_color;
           }
-          demoServer.write("OK");
         }
+        demoServer.write("OK");
       }
     }
   }
