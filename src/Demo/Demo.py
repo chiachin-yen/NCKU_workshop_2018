@@ -129,7 +129,7 @@ def cmd_interpreter(cmd):
         demo_noise_loop()
     elif cmd == "csv":
         load_csv()
-    elif cmd == re "reset":
+    elif cmd == "reset":
         reset()
     else:
         demoSocket.send(cmd.encode())
