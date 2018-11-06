@@ -18,15 +18,21 @@ int pixel_s = 4;
 
 void setup() {
   // Background
-  img = loadImage("Chub.jpg");
-  image(img, 0, 0);
+  size(800, 1200);
+  pushMatrix();
+  translate(-77,-990);
+  scale(0.8);
+
+  img = loadImage("Chub_L.jpg");
+  image(img, 0,0);
+  popMatrix();
 
 
   // TCP Connection Setup
   demoServer = new Server(this, port);
 
   // Tiles Demo Setup
-  size(897, 1191);
+
   // background(255);
   tiles = new Tile[group][cols][rows];
   int[] col_p = {3, 8, 15, 28, 33, 38, 46, 52, 57, 64, 77, 82, 87, 95, 101, 106, 113, 124, 129, 134, 142, 148, 154, 174, 179, 184, 193};
@@ -34,7 +40,7 @@ void setup() {
   for (int i = 0; i<group; i++) {
     for (int j = 0; j<cols; j++) {
       for (int k = 0; k<rows; k++) {
-        tiles[i][j][k]=new Tile(col_p[j], i*135+k*(pixel_s+1), pixel_s, pixel_s);
+        tiles[i][j][k]=new Tile(col_p[j], i*140.35+k*(pixel_s+1.075), pixel_s, pixel_s);
         // tiles[i][j][k].display();
       }
     }
@@ -110,13 +116,13 @@ void draw() {
 }
 
 class Tile {
-  int X;
-  int Y;
+  float X;
+  float Y;
   int size_X;
   int size_Y;
   int tile_color;
 
-  Tile(int temp_X, int temp_Y, int temp_sX, int temp_sY) {
+  Tile(float temp_X, float temp_Y, int temp_sX, int temp_sY) {
     X = temp_X;
     Y = temp_Y;
     size_X = temp_sX;

@@ -84,7 +84,7 @@ def demo_noise_loop():
 
 
 def load_csv():
-    """Load csv file for tiles color"""
+    """Load csv file for tiles color."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
     p = os.path.join(script_dir, "example.csv")
     with open(p, 'r') as fp:
@@ -101,6 +101,7 @@ def load_csv():
             while result != 'OK':
                 demoSocket.send('&'.join(row_val).encode())
                 result = demoSocket.recv(1024).decode()
+                print('Received from server: '+result)
 
 
 def demo_2():
