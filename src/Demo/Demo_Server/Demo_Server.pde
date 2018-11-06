@@ -4,6 +4,10 @@ import processing.net.*;
 int port = 10002;
 Server demoServer;
 
+// Background
+PImage img;
+
+
 // Tiles Parameter
 Tile[][][] tiles;
 int group = 7;
@@ -13,12 +17,17 @@ int pixel_s = 4;
 
 
 void setup() {
+  // Background
+  img = loadImage("Chub.jpg");
+  image(img, 0, 0);
+
+
   // TCP Connection Setup
   demoServer = new Server(this, port);
 
   // Tiles Demo Setup
-  size(900, 1080);
-  background(255);
+  size(897, 1191);
+  // background(255);
   tiles = new Tile[group][cols][rows];
   int[] col_p = {3, 8, 15, 28, 33, 38, 46, 52, 57, 64, 77, 82, 87, 95, 101, 106, 113, 124, 129, 134, 142, 148, 154, 174, 179, 184, 193};
 
@@ -26,13 +35,14 @@ void setup() {
     for (int j = 0; j<cols; j++) {
       for (int k = 0; k<rows; k++) {
         tiles[i][j][k]=new Tile(col_p[j], i*135+k*(pixel_s+1), pixel_s, pixel_s);
-        tiles[i][j][k].display();
+        // tiles[i][j][k].display();
       }
     }
   }
 }
 
 void draw() {
+    translate(350,20);
   // Reading msg via TCP
   // Get the next available client
   Client demoClient = demoServer.available();
