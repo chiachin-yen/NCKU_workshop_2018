@@ -42,7 +42,7 @@ void setup() {
 }
 
 void draw() {
-    translate(350,20);
+  translate(350, 20);
   // Reading msg via TCP
   // Get the next available client
   Client demoClient = demoServer.available();
@@ -57,18 +57,25 @@ void draw() {
         demoServer.stop();
 
       case "test":
-        demoServer.write("Demo Server Activated");
+        demoServer.write("Demo Server Connected");
+
+      case "activate base":
+        demoServer.write("OK");
+        break;
 
       default:
         // Interprete the Message from clients
         String[] clientCommand = split(clientMsg, '&');
+        boolean validCommand = true;
+      outerloop:
         for (int x=0; x<clientCommand.length; x++) {
           String[] commandPara = split(clientCommand[x], '=');
 
           //command exception
           if (commandPara.length < 2) {
-            demoServer.write("command_error");  
-            break;
+            demoServer.write("command_error");
+            validCommand = false;
+            break outerloop;
           }
 
           String[] tileList = split(commandPara[0], ',');
@@ -84,7 +91,9 @@ void draw() {
             tiles[tileNum[0]][tileNum[1]][tileNum[2]].tile_color = tile_new_color;
           }
         }
-        demoServer.write("OK");
+        if (validCommand) {
+          demoServer.write("OK");
+        }
       }
     }
   }

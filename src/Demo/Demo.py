@@ -83,20 +83,6 @@ def demo_noise_loop():
                     # print("Received from server: " + result)
 
 
-'''
-def demo_load_image():
-    """Load image to display."""
-    from PIL import Image
-    img = Image.open("example.jpg")
-    pix = img.load()
-    img_width, img_height = img.size
-    for i in range(tile_group):
-        for j in range(group_row):
-            for k in range(group_col):
-                pass
-'''
-
-
 def load_csv():
     """Load csv file for tiles color"""
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -117,28 +103,6 @@ def load_csv():
                 result = demoSocket.recv(1024).decode()
 
 
-def cmd_interpreter(cmd):
-    """Interpret commands"""
-    if cmd == "demo1":
-        demo_col_rolling()
-    elif cmd == "demo2":
-        demo_2()
-    elif cmd == "noise":
-        demo_noise()
-    elif cmd == "noise_loop":
-        demo_noise_loop()
-    elif cmd == "csv":
-        load_csv()
-    elif cmd == "reset":
-        reset()
-    else:
-        demoSocket.send(cmd.encode())
-        data = demoSocket.recv(1024).decode()
-        print('Received from server: ' + data)
-
-    return True
-
-
 def demo_2():
     """Change one pixel"""
     msg = "1-1-1=2"
@@ -153,17 +117,30 @@ def main():
     print('Received from server: ' + data)
 
     while True:
-        command = ""
-        while command == "":
-            command = input(" -> ")
+        cmd = ""
+        while cmd == "":
+            cmd = input(" -> ")
 
-        # terminate connection if cmd == q
-        if command == "q":
+        if cmd == "demo1":
+            demo_col_rolling()
+        elif cmd == "demo2":
+            demo_2()
+        elif cmd == "noise":
+            demo_noise()
+        elif cmd == "noise_loop":
+            demo_noise_loop()
+        elif cmd == "csv":
+            load_csv()
+        elif cmd == "reset":
+            reset()
+        elif cmd == 'q':
             demoSocket.send('q'.encode())
             demoSocket.close()
             break
-
-        cmd_interpreter(command)
+        else:
+            demoSocket.send(cmd.encode())
+            data = demoSocket.recv(1024).decode()
+            print('Received from server: ' + data)
 
 
 if __name__ == '__main__':
