@@ -11,6 +11,6 @@ with open('sample.csv', 'r', encoding="utf-8", newline='')as fp:
 
 with open('sample.csv', 'r', encoding="utf-8", newline='')as fp:
     csv_reader = csv.DictReader(fp)
-
+    
     for row in csv_reader:
         print(row['區名'])
