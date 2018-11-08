@@ -3,5 +3,5 @@
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
     "python.terminal.activateEnvironment": false,
-    "python.pythonPath": "C:\\ProgramData\\Anaconda3\\python.exe",
+    "python.pythonPath": "C:\\Users\\inspiron\\Anaconda3\\python.exe",
 }

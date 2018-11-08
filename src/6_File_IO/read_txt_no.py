@@ -1,0 +1,5 @@
+fp = open('sample.txt', 'r', encoding='utf-8')
+print(fp.read())
+print("no")
+print(fp.read())
+fp.close()
